@@ -1,0 +1,18 @@
+First Q1 :: 
+class Solution {
+public:
+    vector<int> recoverOrder(vector<int>& order, vector<int>& friends) {
+        unordered_set<int>st;
+        vector<int>ans;
+        for(auto it:friends) {
+            st.insert(it);
+        }
+        for(auto it:order) {
+            if(st.count(it)) {
+                ans.push_back(it);
+            }
+        }
+        return ans;
+    }
+};
+ Tried Q2 but got Stuck
