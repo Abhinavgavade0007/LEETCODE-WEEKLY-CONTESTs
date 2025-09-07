@@ -1,0 +1,23 @@
+//This was Easy did it in a Single Minute
+//First Q.
+class Solution {
+public:
+    int minOperations(vector<int>& nums) {
+        for(auto it:nums) {
+            if(it!=nums[0]) return 1;
+        }
+        return 0;
+    }
+};
+//This was also Easy-Medium
+class Solution {
+public:
+    int minOperations(string s) {
+        int ans=0;
+        for(char ch:s) {
+            int temp=(26-(ch-'a'))%26;
+            ans=max(ans,temp);
+        }
+        return ans;
+    }
+};
