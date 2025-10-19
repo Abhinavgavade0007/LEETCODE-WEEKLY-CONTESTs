@@ -1,0 +1,40 @@
+# first do as it is told 
+class Solution {
+public:
+    int missingMultiple(vector<int>& nums, int k) {
+        unordered_set<int> st(nums.begin(), nums.end());
+        int ans = k;
+        while (true) {
+            if (st.find(multiple) == st.end()) {
+                return ans; 
+            }
+            ans += k; 
+        }
+        return 0;
+    }
+};
+# Just do brute force nd DONE !
+class Solution {
+public:
+    int longestBalanced(vector<int>& nums) {
+        int r=0,l=0;
+        int n=nums.size();
+        int maxlen=INT_MIN;
+        for(int i=0;i<n;i++) {
+            // int evencnt=0,oddcnt=0;
+            unordered_set<int> evenSet, oddSet;
+            for(int j=i;j<n;j++) {
+                if(nums[j]%2 ==0) {
+                    evenSet.insert(nums[j]);
+                } else {
+                    oddSet.insert(nums[j]);
+                }
+                if(evenSet.size() == oddSet.size()) {
+                    maxlen=max(maxlen,j-i+1);
+                }
+            }
+        }
+        return maxlen==INT_MIN ? 0:maxlen;
+    }
+};
+# 3, 4 not done yet , once done i will be updating this 
