@@ -1,0 +1,71 @@
+# 3769. Sort Integers by Binary Reflection
+class Solution {
+public:
+    int check(vector<int>nums,int num) {
+        string temp=bitset<32>(num).to_string();
+        temp.erase(0,temp.find_first_not_of('0'));
+        if(temp.empty()) temp="0";
+        reverse(temp.begin(),temp.end());
+        return stoi(temp,nullptr,2);
+    }
+    vector<int> sortByReflection(vector<int>& nums) {
+        int n=nums.size();
+        vector<int>ans;
+        vector<pair<int,int>>tempans;
+        for(int i=0;i<n;i++) {
+            int ele=check(nums,nums[i]);
+            tempans.push_back({ele,nums[i]});
+        }
+        sort(tempans.begin(),tempans.end(),[&](auto & x,auto& y) {
+            if(x.first == y.first) {
+                return x.second < y.second;
+            }
+            return x.first < y.first;
+        });
+        for(auto it:tempans) {
+            ans.push_back(it.second);
+        }
+        return ans;
+    }
+};
+
+# 3770. Largest Prime from Consecutive Prime Sum
+
+class Solution {
+public:
+    bool check(int num) {
+        if(num < 2) return false;
+        if(num%2 == 0) return num==2;
+        for(int i=3;i*i*1LL<=num;i+=2) {
+            if(num%i == 0) return false;
+        }
+        return true;
+    }
+    int largestPrime(int n) {
+        int finalans=0;
+        long long sum=0;
+        vector<bool>precomp(n+1,true);
+        precomp[1]=precomp[0]=false;
+        for(int i=2;i*i<=n;i++) {
+            if(precomp[i]) {
+                for(int j=i*i;j<=n;j+=i) {
+                    precomp[j]=false;
+                }
+            }
+        }
+        vector<int>numprice;
+        for(int i=2;i<=n;i++) {
+            if(precomp[i]) numprice.push_back(i);
+        }
+        for(auto it:numprice) {
+            sum+=it;
+            if(sum > n) {
+                break;
+            }
+            if(check(sum)) finalans=sum;
+        }
+        return finalans;
+    }
+};
+
+#NEED TO UPSOLVE 3 & 4
