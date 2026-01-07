@@ -1,0 +1,47 @@
+# 3798. Largest Even Number
+
+class Solution {
+public:
+    string largestEven(string s) {
+        int n=s.size();
+        int i=0;
+        for(i=n-1;i>=0;i--) {
+            if((s[i]-'0')%2 == 0) {
+                break;
+            }
+        }
+        if(i < 0) return "";
+        string temp=s.substr(0,i+1);
+        return temp;
+    }
+};
+
+# 3799. Word Squares II
+
+class Solution {
+public:
+    vector<vector<string>> wordSquares(vector<string>& words) {
+        vector<vector<string>>ans;
+        int n=words.size();
+        for(int i=0;i<n;i++) {
+            for(int j=0;j<n;j++) {
+                if(i == j) continue;
+                for(int k=0;k<n;k++) {
+                    if(k == i || k == j) continue;
+                    for(int l=0;l<n;l++) {
+                        if(l == i || l == j || l == k) continue;
+                        string topp=words[i];
+                        string leftt=words[j];
+                        string rightt=words[k];
+                        string bottomm=words[l];
+                        if(topp[0] == leftt[0] && topp[3] == rightt[0] && bottomm[0] == leftt[3] && bottomm[3]==rightt[3]) {
+                            ans.push_back({topp,leftt,rightt,bottomm});
+                        }
+                    }
+                }
+            }
+        }
+        sort(ans.begin(),ans.end());
+        return ans;
+    }
+};
